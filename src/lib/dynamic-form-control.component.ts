@@ -1,43 +1,61 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, ViewEncapsulation} from '@angular/core';
 import {FormGroup} from '@angular/forms';
 import {AbstractFormControl, DynamicFormControlHidden} from './controls/abstract-form-control';
-import {FormControlService} from './form-control.service';
-import {Helper} from '../helper';
-import {BaseComponent} from '../../base.component';
+import {Helper, NgmBaseService} from 'ngm-base';
+import {NgmFormControlService} from './ngm-form-control.service';
 
 @Component({
-    selector: 'app-dynamic-form-control',
-    providers: [FormControlService],
+    selector: 'ngm-dynamic-form-control',
+    providers: [NgmFormControlService],
     template: `
-        <div [formGroup]="form" [hidden]="shouldHide(control)" [dir]="this.dir">
+        <div [formGroup]="form" [hidden]="shouldHide(control)" [dir]="this.baseService.dir">
             <label [attr.for]="control.key">{{control.label}}</label>
-            <mat-form-field [ngSwitch]="control.controlType" appearance="outline" [hintLabel]="">
-                <input *ngSwitchCase="'textbox'" matInput [formControlName]="control.key" [id]="control.key" [type]="control.type"
-                       [placeholder]="control.placeholder" (change)="doChange($event, form, control)" [checked]="control.value">
-                <textarea *ngSwitchCase="'textarea'" matInput [formControlName]="control.key" [id]="control.key" [rows]="control.rows"
-                          [placeholder]="control.placeholder" (change)="doChange($event, form, control)"></textarea>
-                <mat-select [id]="control.key" *ngSwitchCase="'select'" [formControlName]="control.key" [compareWith]="helper.equals"
-                            class="form-control" (valueChange)="doChange($event, form, control)">
-                    <mat-option *ngFor="let opt of control.options" [value]="opt.value">{{opt.label}}</mat-option>
-                </mat-select>
-            </mat-form-field>
-            <mat-error *ngIf="!isValid">* ضروری</mat-error>
-        </div>`,
+            <div [ngSwitch]="control.controlType">
+                <mat-form-field *ngSwitchCase="'textbox'" appearance="outline" [hintLabel]="">
+                    <input matInput [formControlName]="control.key" [id]="control.key" [type]="control.type"
+                           [placeholder]="control.placeholder" (change)="doChange($event, form, control)" [checked]="control.value">
+                </mat-form-field>
+                <mat-form-field *ngSwitchCase="'textarea'" appearance="outline" [hintLabel]="">
+                    <textarea matInput [formControlName]="control.key" [id]="control.key" [rows]="control.rows"
+                              [placeholder]="control.placeholder" (change)="doChange($event, form, control)"></textarea>
+                </mat-form-field>
+                <mat-form-field *ngSwitchCase="'select'" appearance="outline" [hintLabel]="">
+                    <mat-select [id]="control.key" [formControlName]="control.key" [compareWith]="helper.equals"
+                                class="form-control" (valueChange)="doChange($event, form, control)">
+                        <mat-option *ngFor="let opt of control.options" [value]="opt.value">{{opt.label}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <input *ngSwitchCase="'file'" style="display: block;" [formControlName]="control.key" [id]="control.key" [type]="'file'"
+                       [placeholder]="control.placeholder" (change)="doChange($event, form, control)">
+                <mat-form-field *ngSwitchCase="'date-time'" appearance="outline" [hintLabel]="">
+                    <input dir="ltr" matInput [placeholder]="control.placeholder" (onChange)="doChange($event, form, control)"
+                           [formControlName]="control.key" [dpDayPicker]="control.datePickerConfig" [mode]="control.mode"
+                           theme="dp-material" [id]="control.key">
+                </mat-form-field>
+            </div>
+            <mat-error *ngIf="!control.disabled && !isValid">* ضروری</mat-error>
+        </div>
+    `,
     styles: [`.mat-form-field {
         width: 100%;
-    }`]
+    }
+
+    .dp-time-select-controls {
+        direction: ltr;
+    }
+    `],
+    encapsulation: ViewEncapsulation.None
 })
-export class DynamicFormControlComponent extends BaseComponent implements OnInit {
+export class DynamicFormControlComponent {
 
     @Input() control: AbstractFormControl<any>;
     @Input() form: FormGroup;
     helper = Helper;
 
+    constructor(public baseService: NgmBaseService) {}
+
     get isValid() {
         return this.form.controls[this.control.key].valid;
-    }
-
-    ngOnInit(): void {
     }
 
     shouldHide(control: AbstractFormControl<any>) {

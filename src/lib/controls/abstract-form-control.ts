@@ -22,6 +22,7 @@ export interface AbstractFormControlOptions<T> {
     hide?: DynamicFormControlHidden | Boolean;
     validators?: ValidatorFn[];
     bind?: { field: string; fn: Function };
+    disabled?: boolean;
 }
 
 export class AbstractFormControl<T> {
@@ -37,6 +38,7 @@ export class AbstractFormControl<T> {
     hide: DynamicFormControlHidden | Boolean = undefined;
     validators: ValidatorFn[] = [];
     bind: { field: string; fn: Function } = undefined;
+    disabled = false;
 
     constructor(options: AbstractFormControlOptions<T> = {}) {
         const me = this;
@@ -53,6 +55,7 @@ export class AbstractFormControl<T> {
         this.hide = options.hide || undefined;
         this.validators = options.validators || [];
         this.bind = options.bind || undefined;
+        this.disabled = options.disabled || false;
     }
 
     fillData(service) {

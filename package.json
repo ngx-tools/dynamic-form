@@ -1,8 +1,16 @@
 {
   "name": "ngm-dynamic-form",
-  "version": "0.0.1",
+  "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mstmvd/ngm-dynamic-form"
+  },
+  "keywords": ["ngm", "base", "core", "angular", "material", "responsive", "flex", "dynamic form", "reactive form"],
+  "author": "Mostafa Movahedi",
+  "license": "MIT",
   "peerDependencies": {
-    "@angular/common": "^6.0.0-rc.0 || ^6.0.0",
-    "@angular/core": "^6.0.0-rc.0 || ^6.0.0"
+    "ngm-base": "^1.0.0",
+    "ng2-jalali-date-picker": "^2.2.7",
+    "jalali-moment": "^3.2.4"
   }
 }
