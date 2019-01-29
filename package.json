@@ -1,6 +1,6 @@
 {
   "name": "ngm-dynamic-form",
-  "version": "0.1.2",
+  "version": "0.1.9",
   "repository": {
     "type": "git",
     "url": "https://github.com/mstmvd/ngm-dynamic-form"
@@ -9,8 +9,7 @@
   "author": "Mostafa Movahedi",
   "license": "MIT",
   "peerDependencies": {
-    "ngm-base": "^1.0.3",
-    "ng2-jalali-date-picker": "^2.2.7",
-    "jalali-moment": "^3.2.4"
+    "ngm-base": "^1.0.7",
+    "ng2-jalali-date-picker": "^2.2.7"
   }
 }

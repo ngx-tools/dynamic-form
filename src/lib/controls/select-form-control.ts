@@ -1,5 +1,5 @@
 import {AbstractFormControl, AbstractFormControlOptions} from './abstract-form-control';
-import {Helper} from '../../helper';
+import {Helper} from 'ngm-base';
 import {FormGroup} from '@angular/forms';
 
 interface SelectOption {

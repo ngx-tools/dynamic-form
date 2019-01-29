@@ -27,6 +27,8 @@ import {NgmFormControlService} from './ngm-form-control.service';
                 </mat-form-field>
                 <input *ngSwitchCase="'file'" style="display: block;" [formControlName]="control.key" [id]="control.key" [type]="'file'"
                        [placeholder]="control.placeholder" (change)="doChange($event, form, control)">
+                <mat-checkbox *ngSwitchCase="'checkbox'" style="display: block;" [formControlName]="control.key" [id]="control.key"
+                           (change)="doChange($event, form, control)"></mat-checkbox>
                 <mat-form-field *ngSwitchCase="'date-time'" appearance="outline" [hintLabel]="">
                     <input dir="ltr" matInput [placeholder]="control.placeholder" (onChange)="doChange($event, form, control)"
                            [formControlName]="control.key" [dpDayPicker]="control.datePickerConfig" [mode]="control.mode"

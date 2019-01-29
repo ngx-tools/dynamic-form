@@ -4,9 +4,6 @@ import {AbstractFormControl} from './controls/abstract-form-control';
 
 @Injectable()
 export class NgmFormControlService {
-    constructor() {
-    }
-
     toFormGroup(controls: AbstractFormControl<any>[]) {
         const group: any = {};
 

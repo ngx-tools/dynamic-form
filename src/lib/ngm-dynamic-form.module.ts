@@ -1,7 +1,15 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {MatButtonModule, MatCommonModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatSelectModule} from '@angular/material';
+import {
+    MatButtonModule,
+    MatCheckboxModule,
+    MatCommonModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule
+} from '@angular/material';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {NgmBaseModule} from 'ngm-base';
 import {TranslateModule} from '@ngx-translate/core';
@@ -21,6 +29,7 @@ import {DpDatePickerModule} from 'ng2-jalali-date-picker';
         MatFormFieldModule,
         MatInputModule,
         MatSelectModule,
+        MatCheckboxModule,
         FlexLayoutModule,
         TranslateModule,
         NgmBaseModule,
@@ -36,6 +45,7 @@ import {DpDatePickerModule} from 'ng2-jalali-date-picker';
         MatFormFieldModule,
         MatInputModule,
         MatSelectModule,
+        MatCheckboxModule,
         FlexLayoutModule,
         DpDatePickerModule,
     ],
