@@ -1,4 +1,4 @@
-import {Component, Inject, Injector, Input, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, EventEmitter, Inject, Injector, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import {FormGroup} from '@angular/forms';
 import {AbstractFormControl} from './controls/abstract-form-control';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
@@ -54,6 +54,7 @@ export class NgmDynamicModalFormComponent<Entity extends AbstractEntity> impleme
     controls = [];
     form: FormGroup;
     defaultEntity: Entity;
+    onSubmit = new EventEmitter();
 
     constructor(@Inject(MAT_DIALOG_DATA) public data: FormModalData<Entity>, public translate: TranslateService, private injector: Injector,
                 private formControlService: NgmFormControlService, public dialogRef: MatDialogRef<NgmDynamicModalFormComponent<Entity>>,
@@ -69,7 +70,7 @@ export class NgmDynamicModalFormComponent<Entity extends AbstractEntity> impleme
 
     submit() {
         if (this.form.valid) {
-            this.dialogRef.close(this.controls);
+            this.onSubmit.emit(this.controls);
         }
     }
 
